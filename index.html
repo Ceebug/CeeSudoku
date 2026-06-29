@@ -1171,6 +1171,15 @@ position: relative;
 	}
 }
     </style>
+	<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('https://raw.githubusercontent.com/Ceebug/CeeSudoku/refs/heads/main/sw.js')
+      .then(() => console.log('Service Worker Registered'))
+      .catch((err) => console.log('Registration Failed', err));
+  }
+</script>
+<link rel="manifest" href="https://raw.githubusercontent.com/Ceebug/CeeSudoku/9fbea2fdf795157e473ad1638151710ad58f1eb1/manifest.json">
+
 </head>
 
 <body class="dark">
