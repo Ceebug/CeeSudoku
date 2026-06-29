@@ -3,15 +3,21 @@
   "name": "Sudoku",
   "icons": [
     {
-      "src": "./icon.png",
+      "src": "./icon192.png",
       "type": "image/png",
-      "sizes": "190x190",
+      "sizes": "192x192",
       "purpose": "any"
-    }
+    },
+    {
+      "src": "./icon512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    }    
   ],
   "start_url": "./index.html",
   "background_color": "#ffffff",
-  "theme_color": "#ffffff",
-  "display": "fullscreen",
+  "theme_color": "#000000",
+  "display": "standalone",
   "orientation": "portrait"
 }
