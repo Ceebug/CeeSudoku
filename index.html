@@ -1603,30 +1603,31 @@ let startTime;
 let pausedElapsed = 0;
 let timerId;
 let timerPaused = false;
-
-function startTimer() {
-    startTime = Date.now() - pausedElapsed;
+let timerRestoredFromSave = false;
+function pauseTimer() {
+    timerPaused = true;
 
     clearInterval(timerId);
 
-    timerId = setInterval(() => {
-        elapsed = Math.floor((Date.now() - startTime) / 1000);
+    // freeze exact time
+    elapsedMs = Date.now() - startTime;
 
-        timerEl.textContent = `Time: ${formatTime(elapsed)}`;
-    }, 100);
+    pauseBtn.textContent = "▶";
+    title.textContent = "Sudoku - Paused";
+
+    saveGame();
 }
-
 function pauseTimer() {
-    timerPaused = !timerPaused;
+    timerPaused = true;
 
-    if (timerPaused) {
-        pausedElapsed = Date.now() - startTime;
-        clearInterval(timerId);
+    clearInterval(timerId);
 
-        pauseBtn.textContent = "▶";
+    elapsedMs = Date.now() - startTime;
 
-        title.textContent = "Sudoku - Paused";
-		saveGame()
+    pauseBtn.textContent = "▶";
+    title.textContent = "Sudoku - Paused";
+
+    saveGame();
 
     } else {
         startTimer();
