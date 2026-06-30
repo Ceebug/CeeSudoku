@@ -46,7 +46,12 @@
     }.cell.related {
         background: color-mix(in srgb, var(--blue) 12%, var(--surface));
     }
-    
+    .mode-wheel {
+		font-size: 22px
+	}
+	#mode {
+		padding: 10 10 15 10px
+	}
     .cell.same-number {
         background: color-mix(in srgb, var(--blue) 20%, var(--surface));
     }
@@ -1349,11 +1354,7 @@ position: relative;
 
                 </div>
             </aside>
-<div style="display: flex;position: absolute;right: 20px;top: 20px;width: 120px;gap: 10px;"><button id="mode" class="hint-button" onclick="changemode()" style="justify-self: right;width: 50px;height: 50px;right: 20px;top: 20px;"><button id="mode">
-    <span class="mode-wheel">
-        <span>☀</span>
-        <span><b>☾</b></span>
-    </span>
+<div style="display: flex;position: absolute;right: 20px;top: 20px;width: 120px;gap: 10px;"><button id="mode" class="hint-button" onclick="changemode()" style="font-size:22px;justify-self: right;width: 50px;height: 50px;right: 20px;top: 20px;">☀<button id="mode">
 </button></button><button id="pause-btn" class="hint-button" onclick="pauseTimer()" style="justify-self: left;width: 50px;height: 50px;right: 20px;top: 20px;">❚❚</button>
 </div>
         </main>
@@ -1479,31 +1480,36 @@ position: relative;
                 winOverlay.classList.add("show");
             });
         }
-        function changemode() {
-    const wheel = document.getElementById("modeWheel");
+let pageMode = "dark";
 
+function changeMode() {
+    const modeButton = document.getElementById("mode");
+
+    // If currently light, switch back to dark immediately.
     if (pageMode === "light") {
         document.body.className = "dark";
         pageMode = "dark";
-        wheel.style.transform = "translateY(0)";
+        if (modeButton) modeButton.innerHTML = "☀";
         return;
     }
 
+    // Otherwise switch to light.
     document.body.className = "light";
     pageMode = "light";
-    wheel.style.transform = "translateY(-50px)";
+    if (modeButton) modeButton.innerHTML = "<b>☾</b>";
 
+    // Switch back to dark once the page has finished loading.
     if (document.readyState === "complete") {
         document.body.className = "dark";
         pageMode = "dark";
-        wheel.style.transform = "translateY(0)";
+        if (modeButton) modeButton.innerHTML = "☀";
     } else {
         window.addEventListener("load", function restoreDark() {
             window.removeEventListener("load", restoreDark);
 
             document.body.className = "dark";
             pageMode = "dark";
-            wheel.style.transform = "translateY(0)";
+            if (modeButton) modeButton.innerHTML = "☀";
         });
     }
 }
